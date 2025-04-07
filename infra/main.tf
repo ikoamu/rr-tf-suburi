@@ -22,3 +22,8 @@ module "apigw" {
   function_name = module.lambda.function_name
   invoke_arn    = module.lambda.invoke_arn
 }
+
+module "cloudwatch" {
+  source        = "./modules/cloudwatch"
+  function_name = module.lambda.function_name
+}
