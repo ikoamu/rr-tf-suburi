@@ -7,19 +7,14 @@ terraform {
   }
 }
 
-module "s3" {
-  source = "./modules/s3"
-}
-
 module "iam" {
   source = "./modules/iam"
 }
 
 module "lambda" {
-  source       = "./modules/lambda"
-  region       = var.region
-  asset_bucket = module.s3.ikoamu_suburi_assets_bucket
-  role_arn     = module.iam.ikoamu_suburi_role_arn
+  source   = "./modules/lambda"
+  region   = var.region
+  role_arn = module.iam.ikoamu_suburi_role_arn
 }
 
 module "apigw" {
