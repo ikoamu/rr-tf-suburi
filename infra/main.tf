@@ -12,10 +12,17 @@ module "iam" {
   idp_id = module.cognito.idp_id
 }
 
+module "s3" {
+  source = "./modules/s3"
+}
+
 module "lambda" {
-  source   = "./modules/lambda"
-  region   = var.region
-  role_arn = module.iam.ikoamu_suburi_role_arn
+  source             = "./modules/lambda"
+  region             = var.region
+  role_arn           = module.iam.ikoamu_suburi_role_arn
+  archive_bucket     = module.s3.archive_bucket
+  archive_bucket_key = module.s3.archive_bucket_key
+  source_code_hash   = module.s3.archive_source_code_hash
 }
 
 module "apigw" {
