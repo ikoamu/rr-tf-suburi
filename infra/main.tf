@@ -33,6 +33,7 @@ module "cognito" {
   source                        = "./modules/cognito"
   authenticated_user_role_arn   = module.iam.ikoamu_suburi_authenticated_user_role_arn
   unauthenticated_user_role_arn = module.iam.ikoamu_suburi_unauthenticated_user_role_arn
+  api_endpoint                  = module.apigw.api_endpoint
   google_client_id              = var.google_client_id
   google_client_secret          = var.google_client_secret
 }

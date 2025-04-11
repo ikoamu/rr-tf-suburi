@@ -13,3 +13,7 @@ variable "google_client_id" {
 variable "google_client_secret" {
   type = string
 }
+
+variable "api_endpoint" {
+  type = string
+}

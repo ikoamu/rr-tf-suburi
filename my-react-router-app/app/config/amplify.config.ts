@@ -2,6 +2,7 @@ const userPoolId = import.meta.env.VITE_USER_POOL_ID;
 const awsRegion = import.meta.env.VITE_AWS_REGION;
 const userPoolClientId = import.meta.env.VITE_USER_POOL_CLIENT_ID;
 const identityPoolId = import.meta.env.VITE_IDENTITY_POOL_ID;
+const domain = import.meta.env.VITE_DOMAIN;
 
 export const amplifyConfig = {
   "auth": {
@@ -23,8 +24,8 @@ export const amplifyConfig = {
     },
     "oauth": {
       "identity_providers": ["GOOGLE"],
-      "redirect_sign_in_uri": ["http://localhost:5173/callback"],
-      "redirect_sign_out_uri": ["http://localhost:5173"],
+      "redirect_sign_in_uri": [`${domain}/callback`],
+      "redirect_sign_out_uri": [domain],
       "response_type": "code",
       "scopes": [
         "phone",

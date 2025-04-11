@@ -8,10 +8,12 @@ resource "aws_cognito_user_pool_client" "ikoamu_suburi" {
   user_pool_id    = aws_cognito_user_pool.ikoamu_suburi.id
   generate_secret = false
   callback_urls = [
-    "http://localhost:5173/callback"
+    "http://localhost:5173/callback",
+    "${var.api_endpoint}/callback"
   ]
   logout_urls = [
-    "http://localhost:5173"
+    "http://localhost:5173",
+    var.api_endpoint
   ]
   allowed_oauth_flows = ["code"]
   explicit_auth_flows = [
