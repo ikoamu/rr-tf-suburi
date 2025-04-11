@@ -1,25 +1,21 @@
 import {
-	Form,
-	Link,
 	Outlet,
 	Scripts,
 	ScrollRestoration,
 	isRouteErrorResponse,
 } from "react-router";
 import type { Route } from "./+types/root";
-
+import { Amplify } from "aws-amplify";
 import appStylesHref from "./app.css?url";
-import { createEmptyContact } from "./data";
+import 'aws-amplify/auth/enable-oauth-listener';
+import { amplifyConfig } from "./config/amplify.config";
 
-export async function action() {
-	const contact = await createEmptyContact();
-	return {
-		contact,
-	};
-}
+Amplify.configure(amplifyConfig);
 
-export default function App() {
-	return <Outlet />;
+export default function App({
+	loaderData
+}: Route.ComponentProps) {
+	return <Outlet context={loaderData} />;
 }
 
 // The Layout component is a special export for the root route.
