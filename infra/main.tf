@@ -7,9 +7,14 @@ terraform {
   }
 }
 
+module "dynamodb" {
+  source = "./modules/dynamodb"
+}
+
 module "iam" {
-  source = "./modules/iam"
-  idp_id = module.cognito.idp_id
+  source         = "./modules/iam"
+  idp_id         = module.cognito.idp_id
+  todo_table_arn = module.dynamodb.todo_table_arn
 }
 
 module "s3" {

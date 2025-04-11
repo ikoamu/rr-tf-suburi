@@ -1,7 +1,7 @@
-const userPoolId = import.meta.env.VITE_USER_POOL_ID;
-const awsRegion = import.meta.env.VITE_AWS_REGION;
-const userPoolClientId = import.meta.env.VITE_USER_POOL_CLIENT_ID;
-const identityPoolId = import.meta.env.VITE_IDENTITY_POOL_ID;
+export const userPoolId = import.meta.env.VITE_USER_POOL_ID;
+export const awsRegion = import.meta.env.VITE_AWS_REGION;
+export const userPoolClientId = import.meta.env.VITE_USER_POOL_CLIENT_ID;
+export const identityPoolId = import.meta.env.VITE_IDENTITY_POOL_ID;
 const domain = import.meta.env.VITE_DOMAIN;
 
 export const amplifyConfig = {

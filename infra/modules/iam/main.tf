@@ -11,6 +11,29 @@ data "aws_iam_policy_document" "ikoamu_suburi" {
   }
 }
 
+resource "aws_iam_policy" "ikoamu_suburi_dynamodb_crud" {
+  name = "roam_dynamodb_crud"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:BatchGetItem",
+          "dynamodb:Scan",
+          "dynamodb:Query",
+          "dynamodb:ConditionCheckItem"
+        ],
+        "Resource" : [var.todo_table_arn]
+      }
+    ],
+  })
+}
+
 resource "aws_iam_role" "ikoamu_suburi" {
   name               = "ikoamu_suburi"
   assume_role_policy = data.aws_iam_policy_document.ikoamu_suburi.json
@@ -61,6 +84,11 @@ resource "aws_iam_role" "ikoamu_suburi_authenticated_user" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "function_crud_attachment" {
+  role       = aws_iam_role.ikoamu_suburi_authenticated_user.id
+  policy_arn = aws_iam_policy.ikoamu_suburi_dynamodb_crud.arn
 }
 
 resource "aws_iam_role" "ikoamu_suburi_unauthenticated_user" {
